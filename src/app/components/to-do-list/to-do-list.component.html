@@ -1,1 +1,23 @@
-<p>To do works</p>
+<input type="text" placeholder="What needs to be done?" [(ngModel)]="todoTitle">
+
+<button (click)="addTodo()">ADD</button>
+
+
+<div *ngFor="let todo of todos">
+    <div>
+        <div>{{ todo.title }}</div>
+    </div>
+</div>
+
+
+<!-- next step filters-->
+<div>
+    <div>
+        <button>ALL</button>
+        <button>ACTIVE</button>
+        <button>COMPLETED</button>
+    </div>
+    <div>
+        <button>DELETE ALL</button>
+    </div>  
+</div>
