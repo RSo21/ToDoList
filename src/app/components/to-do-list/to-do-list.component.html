@@ -1,11 +1,33 @@
 <input type="text" placeholder="What needs to be done?" [(ngModel)]="todoTitle">
 
+
+
+<!-- find the selected solution -->
+<form>
+    <label>Status</label>
+    <select [(ngModel)]="selectedValue" name="status">
+        <option *ngFor="let status of todoStatuses" [value]="status.value">
+            {{status.viewValue}}
+        </option>
+    </select>
+    <label>Priority</label>
+    <select [(ngModel)]="selectedValuePrior" name="priority">
+        <option *ngFor="let priority of todoPriorities" [value]="priority.value">
+            {{priority.viewValue}}
+        </option>
+    </select>
+</form>
+
+<input type="datetime-local">
+
 <button (click)="addTodo()">ADD</button>
 
 
 <div *ngFor="let todo of todos">
     <div>
         <div>{{ todo.title }}</div>
+        <div>{{ todo.status }}</div>
+        <div>{{ todo.priority }}</div>
     </div>
 </div>
 
@@ -14,8 +36,9 @@
 <div>
     <div>
         <button>ALL</button>
-        <button>ACTIVE</button>
-        <button>COMPLETED</button>
+        <button>TO DO</button>
+        <button>IN PROGRESS</button>
+        <button>DONE</button>
     </div>
     <div>
         <button>DELETE ALL</button>
