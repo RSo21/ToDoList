@@ -59,7 +59,8 @@ export class ToDoListComponent implements OnInit {
   addTodo(): void {
     if (this.todoTitle.trim().length === 0 
     && this.selectedValue.trim().length === 0
-    && this.selectedValuePrior.trim().length === 0) {
+    && this.selectedValuePrior.trim().length === 0
+    && this.todoDescription.trim().length === 0) {
       return;
     }
 
@@ -68,11 +69,14 @@ export class ToDoListComponent implements OnInit {
       title: this.todoTitle,
       status: this.selectedValue,
       priority: this.selectedValuePrior,
+      description: this.todoDescription,
+      
     })
 
     this.todoTitle = '';
     this.selectedValue= '';
-    this.selectedValuePrior= '',
+    this.selectedValuePrior= '';
+    this.todoDescription= '';
     this.todoId++;
   }
 }

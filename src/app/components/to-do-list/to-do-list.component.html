@@ -1,26 +1,40 @@
-<input type="text" placeholder="What needs to be done?" [(ngModel)]="todoTitle">
+<mat-form-field appearance="fill">
+    <mat-label>What needs to be done?</mat-label>
+    <input matInput [(ngModel)]="todoTitle">
+</mat-form-field>
 
-
-
-<!-- find the selected solution -->
-<form>
-    <label>Status</label>
-    <select [(ngModel)]="selectedValue" name="status">
-        <option *ngFor="let status of todoStatuses" [value]="status.value">
+<mat-form-field appearance="fill">
+  <mat-label>Status</mat-label>
+  <mat-select [(ngModel)]="selectedValue" name="status">
+    <mat-option *ngFor="let status of todoStatuses" [value]="status.value">
             {{status.viewValue}}
-        </option>
-    </select>
-    <label>Priority</label>
-    <select [(ngModel)]="selectedValuePrior" name="priority">
-        <option *ngFor="let priority of todoPriorities" [value]="priority.value">
+        </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Priority</mat-label>
+    <mat-select [(ngModel)]="selectedValuePrior" name="priority">
+        <mat-option  *ngFor="let priority of todoPriorities" [value]="priority.value">
             {{priority.viewValue}}
-        </option>
-    </select>
-</form>
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Description</mat-label>
+  <textarea matInput [(ngModel)]="todoDescription"></textarea>
+</mat-form-field>
 
-<input type="datetime-local">
+<mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 
-<button (click)="addTodo()">ADD</button>
+<div>
+    <button mat-raised-button color="primary" (click)="addTodo()">ADD</button>
+</div>
 
 
 <div *ngFor="let todo of todos">
@@ -28,9 +42,9 @@
         <div>{{ todo.title }}</div>
         <div>{{ todo.status }}</div>
         <div>{{ todo.priority }}</div>
+        <div>{{ todo.description }} </div>
     </div>
 </div>
-
 
 <!-- next step filters-->
 <div>
