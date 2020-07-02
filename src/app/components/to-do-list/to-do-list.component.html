@@ -1,50 +1,69 @@
-<mat-form-field appearance="fill">
-    <mat-label>What needs to be done?</mat-label>
-    <input matInput [(ngModel)]="todoTitle">
-</mat-form-field>
+<div class="container">
+  <div class="title-container">
+      <mat-form-field appearance="fill">
+          <mat-label>What needs to be done?</mat-label>
+          <input matInput [(ngModel)]="todoTitle">
+      </mat-form-field>
+  </div>
+  <div class="status-and-priority">
+      <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="status">
+            <mat-option *ngFor="let status of todoStatuses" [value]="status.value">
+                    {{status.viewValue}}
+                </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select [(ngModel)]="selectedValuePrior" name="priority">
+                <mat-option  *ngFor="let priority of todoPriorities" [value]="priority.value">
+                    {{priority.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+  </div>
+  <div class="desc-container">
+      <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="todoDescription"></textarea>
+      </mat-form-field>
+  </div>
+  <div class="date-container">
+      <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  </div>
 
-<mat-form-field appearance="fill">
-  <mat-label>Status</mat-label>
-  <mat-select [(ngModel)]="selectedValue" name="status">
-    <mat-option *ngFor="let status of todoStatuses" [value]="status.value">
-            {{status.viewValue}}
-        </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-    <mat-label>Priority</mat-label>
-    <mat-select [(ngModel)]="selectedValuePrior" name="priority">
-        <mat-option  *ngFor="let priority of todoPriorities" [value]="priority.value">
-            {{priority.viewValue}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Description</mat-label>
-  <textarea matInput [(ngModel)]="todoDescription"></textarea>
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
 
 <div>
     <button mat-raised-button color="primary" (click)="addTodo()">ADD</button>
 </div>
 
-
-<div *ngFor="let todo of todos">
+<mat-card *ngFor="let todo of todos">
     <div>
-        <div>{{ todo.title }}</div>
-        <div>{{ todo.status }}</div>
-        <div>{{ todo.priority }}</div>
-        <div>{{ todo.description }} </div>
+        <mat-card-header>
+          <mat-card-title>{{ todo.title }}</mat-card-title>
+          <mat-card-subtitle>PRIORITY: {{ todo.priority }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{ todo.description }} 
+          </p>
+          <p>
+            STATUS: {{ todo.status }} 
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">EDIT</button>
+          <button mat-raised-button color="primary">DELETE</button>
+        </mat-card-actions>
     </div>
-</div>
+</mat-card>
 
 <!-- next step filters-->
 <div>
@@ -57,4 +76,5 @@
     <div>
         <button>DELETE ALL</button>
     </div>  
+</div>
 </div>
