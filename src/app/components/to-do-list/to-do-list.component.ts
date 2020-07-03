@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { Todo } from '../../interfaces/todo';
+import { Todo } from '../../interfaces/todo';
 import { Status } from '../../interfaces/status';
 import { Priority } from '../../interfaces/priority';
 
@@ -9,7 +9,7 @@ import { Priority } from '../../interfaces/priority';
   styleUrls: ['./to-do-list.component.scss']
 })
 export class ToDoListComponent implements OnInit {
-  todos: object[];
+  todos: Todo[];
   todoTitle: string;
   todoId: number;
   todoStatuses: Status[];
@@ -19,6 +19,10 @@ export class ToDoListComponent implements OnInit {
 
   selectedValue: string;
   selectedValuePrior: string;
+
+  beforeEditCache: string;
+  anyRemainingModel: boolean;
+  filter: string;
 
   constructor() { }
 
@@ -41,19 +45,32 @@ export class ToDoListComponent implements OnInit {
       {
         'id': 1,
         'title': 'Check what TypeScript is',
-        'selectedValue': 'to do',
+        'completed': false,
+        'editing': false,
+        'status': 'to do',
+        'priority': 'low',
+        'description': '',
       },
       {
         'id': 2,
         'title': 'Go to sleep',
-        'selectedValue': '',
+        'completed': false,
+        'editing': false,
+        'status': 'to do',
+        'priority': 'low',
+        'description': '',
       },
       {
         'id': 3,
         'title': 'Save the world',
-        'selectedValue': '',
+        'completed': false,
+        'editing': false,
+        'status': 'to do',
+        'priority': 'low',
+        'description': '',
       },
     ];
+   
   }
 
   addTodo(): void {
@@ -67,10 +84,11 @@ export class ToDoListComponent implements OnInit {
     this.todos.push({
       id: this.todoId,
       title: this.todoTitle,
+      completed: false,
+      editing: false,
       status: this.selectedValue,
       priority: this.selectedValuePrior,
-      description: this.todoDescription,
-      
+      description: this.todoDescription
     })
 
     this.todoTitle = '';
@@ -78,6 +96,16 @@ export class ToDoListComponent implements OnInit {
     this.selectedValuePrior= '';
     this.todoDescription= '';
     this.todoId++;
+  }
+
+  editTodo(todo: Todo): void {
+    this.beforeEditCache = todo.title;
+    this.beforeEditCache = todo.status;
+    todo.editing = true;
+  }
+
+  deleteTodo(id: number): void {
+    this.todos = this.todos.filter(todo => todo.id !== id);
   }
 }
 
