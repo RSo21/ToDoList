@@ -39,15 +39,15 @@
       </mat-form-field>
   </div>
 
-
 <div>
     <button mat-raised-button color="primary" (click)="addTodo()">ADD</button>
 </div>
 
 <mat-card *ngFor="let todo of todos">
-    <div>
+    <div *ngIf="!todo.editing; else editingTodo">
         <mat-card-header>
-          <mat-card-title>{{ todo.title }}</mat-card-title>
+          <input type="text" [(ngModel)]="todo.title" (blur)="doneEdit(todo)" (keyup.enter)="doneEdit(todo)" (keyup.esc)="cancelEdit(todo)"autofocus>
+          <mat-card-title *ngIf="!todo.editing; else editingTodo" [ngClass]="{ 'completed' : todo.completed }" (dblclick)="editTodo(todo)">{{ todo.title }}</mat-card-title>
           <mat-card-subtitle>PRIORITY: {{ todo.priority }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
@@ -59,22 +59,8 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">EDIT</button>
-          <button mat-raised-button color="primary">DELETE</button>
+          <button mat-raised-button color="primary" (click)="editTodo(todo)">EDIT</button>
+          <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)">DELETE</button>
         </mat-card-actions>
     </div>
 </mat-card>
-
-<!-- next step filters-->
-<div>
-    <div>
-        <button>ALL</button>
-        <button>TO DO</button>
-        <button>IN PROGRESS</button>
-        <button>DONE</button>
-    </div>
-    <div>
-        <button>DELETE ALL</button>
-    </div>  
-</div>
-</div>
