@@ -5,5 +5,7 @@ export interface Todo {
     editing: boolean,
     status: string,
     priority: string,
-    description: string
+    description: string,
+    date: any,
+    selected: boolean,
   }

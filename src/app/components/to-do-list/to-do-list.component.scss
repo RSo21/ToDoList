@@ -1,7 +1,67 @@
+@mixin mobile{
+    @media (max-width: 599px){
+        @content;
+    }
+}
+
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2em;
+
+    .app-name{
+        font-size: 2em;
+    }
+
+    .title-container{
+        .title{
+            width: 40vw; 
+            @include mobile{
+                width: 80vw; 
+            }
+        }
+    }
+    .status-and-priority{
+        display: flex;
+        justify-content: space-between;
+        width: 40vw; 
+            @include mobile{
+                width: 80vw; 
+            }
+        .status,
+        .priority{
+            width: 19vw;
+                @include mobile{
+                width: 39vw; 
+            }
+        }
+    }
+    .description-container,
+    .date-container{
+        .description,
+        .date{
+            width: 40vw; 
+                @include mobile{
+                    width: 80vw; 
+                }
+        }
+    }
+
+    .button-add-container{
+        padding-bottom: 2em;
+        .button-add{
+            width: 20vh;
+            &:hover{
+                box-shadow: 0.1em 0.1em 0.8em #3F51B5;
+            }
+        }
+    }  
+    .todos-container{
+        width: 40vw;
+        margin-bottom: 2em;
+        @include mobile{
+            width: 80vw; 
+        }
+    }
 }
