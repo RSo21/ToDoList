@@ -14,7 +14,7 @@ export class ToDoListComponent implements OnInit {
   todoId: number;
   todoStatuses: Status[];
   todoDescription: string;
-  todoDateTime: string;
+  todoDate: any;
   todoPriorities: Priority[];
 
   selectedValue: string;
@@ -23,6 +23,8 @@ export class ToDoListComponent implements OnInit {
   beforeEditCache: string;
   anyRemainingModel: boolean;
   filter: string;
+
+  selected: true;
 
   constructor() { }
 
@@ -35,7 +37,8 @@ export class ToDoListComponent implements OnInit {
       {value: 'done', viewValue: 'done'},
     ];
     this.todoDescription = '';
-    this.todoDateTime = '';
+    this.todoDate = '';
+    this.selected= true;
     this.todoPriorities = [
       {value: 'low', viewValue: 'low'},
       {value: 'medium', viewValue: 'medium'},
@@ -50,34 +53,19 @@ export class ToDoListComponent implements OnInit {
         'status': 'to do',
         'priority': 'low',
         'description': '',
+        'date': '',
+        'selected': true,
       },
-      {
-        'id': 2,
-        'title': 'Go to sleep',
-        'completed': false,
-        'editing': false,
-        'status': 'to do',
-        'priority': 'low',
-        'description': '',
-      },
-      {
-        'id': 3,
-        'title': 'Save the world',
-        'completed': false,
-        'editing': false,
-        'status': 'to do',
-        'priority': 'low',
-        'description': '',
-      },
-    ];
-   
+    ]; 
+    
   }
 
   addTodo(): void {
     if (this.todoTitle.trim().length === 0 
     && this.selectedValue.trim().length === 0
     && this.selectedValuePrior.trim().length === 0
-    && this.todoDescription.trim().length === 0) {
+    && this.todoDescription.trim().length === 0
+    && this.todoDate.trim().length === 0) {
       return;
     }
 
@@ -88,14 +76,18 @@ export class ToDoListComponent implements OnInit {
       editing: false,
       status: this.selectedValue,
       priority: this.selectedValuePrior,
-      description: this.todoDescription
+      description: this.todoDescription,
+      date: this.todoDate,
+      selected: this.selected
     })
 
     this.todoTitle = '';
     this.selectedValue= '';
     this.selectedValuePrior= '';
     this.todoDescription= '';
+    this.todoDate='';
     this.todoId++;
+    this.selected;
   }
 
   editTodo(todo: Todo): void {
