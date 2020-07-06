@@ -1,5 +1,6 @@
 {
   "name": "to-do-list",
+  "homepage": "https://rso21.github.io/ToDoList/",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
