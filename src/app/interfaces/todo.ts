@@ -7,5 +7,4 @@ export interface Todo {
     priority: string,
     description: string,
     date: any,
-    selected: boolean,
   }

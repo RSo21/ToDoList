@@ -21,16 +21,15 @@ export class ToDoListComponent implements OnInit {
   selectedValuePrior: string;
 
   beforeEditCache: string;
-  anyRemainingModel: boolean;
-  filter: string;
 
-  selected: true;
+  // selectedStatus: string;
+  // selectedPriority: string;
 
   constructor() { }
 
   ngOnInit() {
     this.todoTitle = '';
-    this.todoId = 4;
+    this.todoId = 2;
     this.todoStatuses = [
       {value: 'to do', viewValue: 'to do'},
       {value: 'in progress', viewValue: 'in progress'},
@@ -38,7 +37,8 @@ export class ToDoListComponent implements OnInit {
     ];
     this.todoDescription = '';
     this.todoDate = '';
-    this.selected= true;
+    // this.selectedStatus= 'to do';
+    // this.selectedPriority= 'low';
     this.todoPriorities = [
       {value: 'low', viewValue: 'low'},
       {value: 'medium', viewValue: 'medium'},
@@ -47,17 +47,15 @@ export class ToDoListComponent implements OnInit {
     this.todos = [
       {
         'id': 1,
-        'title': 'Check what TypeScript is',
+        'title': 'Send a CV',
         'completed': false,
         'editing': false,
         'status': 'to do',
         'priority': 'low',
-        'description': '',
-        'date': '',
-        'selected': true,
+        'description': 'Send CV to XYZ Sp. z o.o.',
+        'date': 'Fri Jul 17 2020',
       },
     ]; 
-    
   }
 
   addTodo(): void {
@@ -78,7 +76,6 @@ export class ToDoListComponent implements OnInit {
       priority: this.selectedValuePrior,
       description: this.todoDescription,
       date: this.todoDate,
-      selected: this.selected
     })
 
     this.todoTitle = '';
@@ -87,12 +84,10 @@ export class ToDoListComponent implements OnInit {
     this.todoDescription= '';
     this.todoDate='';
     this.todoId++;
-    this.selected;
   }
 
   editTodo(todo: Todo): void {
     this.beforeEditCache = todo.title;
-    this.beforeEditCache = todo.status;
     todo.editing = true;
   }
 
